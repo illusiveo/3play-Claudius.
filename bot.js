@@ -450,6 +450,84 @@ client.on("message", message => {
     break;
     }
 });
+
+        case "clear":
+            console.log(`${message.author.tag} used the ${settings.botPREFIX}clear command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}clear command!`);
+
+            if (!message.guild.member(message.author).hasPermission('MANAGE_MESSAGES')) return message.reply(':lock: **You** need `MANAGE_MESSAGES` permissions to execute `clear`');
+            if (!message.guild.member(client.user).hasPermission('MANAGE_MESSAGES')) return message.reply(':lock: **I** need `MANAGE_MESSAGES` Permissions to execute `clear`');
+            const firstUserClear = message.mentions.users.first();
+            const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
+            if (!amount) return message.reply('Must specify an amount to delete!');
+            if (!amount && !firstUserClear) return message.reply('Must specify a user and amount, or just an amount, of messages to purge!');
+            message.channel.fetchMessages({
+                limit: amount,
+            }).then((messages) => {
+                if (firstUserClear) {
+                    const filterBy = firstUserClear ? firstUserClear.id : client.user.id;
+                    messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
+                }
+                message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
+            });
+            break;
+
+            case "botstatus":
+            console.log(`${message.author.tag} used the ${settings.botPREFIX}botstatus command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}botstatus command!`);
+
+            let setStatusArgs = message.content.split(' ').slice(1).join(' ');
+            
+            if (!message.author.id == settings.ownerID) return message.channel.send(`\`📛\` You're not allowed to execute this command!`);
+            if (!setStatusArgs) return message.channel.send(`**Missing argument.**\nExample: **${settings.botPREFIX}setstatus [online, idle, dnd, invisible]**`);
+            if (!setStatusArgs == "online" || "idle" || "dnd" || "invisible") return message.channel.send(`**Wrong argument.**\nExample: **${settings.botPREFIX}setstatus [online, idle, dnd, invisible]**`);
+
+            client.user.setStatus(setStatusArgs)
+            .then(message.channel.send(' :ok_hand: **Done**'));
+            break;
+
+            case "calc":
+            console.log(`${message.author.tag} used the ${settings.botPREFIX}calc command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}calc command!`);
+                let math = require('math-expression-evaluator');
+                let calcArgs = message.content.split(' ').slice(1).join(' ');
+
+                if (!calcArgs[0]) {
+                    message.channel.send({embed: {
+                        color: 3447003,
+                        footer: {
+                          icon_url: client.user.avatarURL,
+                          text: "Please input an expression."
+                        }
+                      }
+                    });
+                }
+                let calcResult;
+                try {
+                    calcResult = math.eval(calcArgs);
+                } catch (e) { 
+                    calcResult = 'Error: "Invalid Input"';
+                }
+
+                message.channel.send({embed: {
+                    color: 3447003,
+                    author: {
+                      name: 'SenpaiBot\'s calculator',
+                      icon_url: client.user.avatarURL
+                    },
+                    fields: [
+                        { name: "Input", value: `\`\`\`js\n${calcArgs}\`\`\`` },
+                      { name: "Output", value: `\`\`\`js\n${calcResult}\`\`\`` }
+                    ],
+                    timestamp: new Date(),
+                    footer: {
+                      icon_url: client.user.avatarURL,
+                      text: "© SenpaiBot"
+                    }
+                  }
+                });
+            break;
+        
  
  
  
