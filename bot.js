@@ -519,7 +519,7 @@ client.on("message", async message => {
             return message.reply('You must give me a reason for kick **Usage:**`~kick [@mention] [example]`').then(message => message.delete(5000));
         }
         if (!message.guild.member(usermentionkick).kickable) {
-            return message.reply('This member is above me in the `role chain` Can\'t kick him');.then(message => message.delete(5000));
+            return message.reply('This member is above me in the `role chain` Can\'t kick him');then(message => message.delete(5000));
         }
         message.guild.member(usermentionkick).kick();
 
@@ -1316,5 +1316,5 @@ message.channel.send({embed: {
     break;
     }
 });
- 
+
 client.login(process.env.BOT_TOKEN);
