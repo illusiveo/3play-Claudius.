@@ -273,7 +273,183 @@ client.on("message", message => {
    
    }
    });
- 
+
+// Help commands:
+        case "help":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}help command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}help command!`);
+
+        try {
+            message.reply(":inbox_tray: **Please check your direct messages**");
+
+            message.react('✅');
+
+            message.author.send({embed: {
+            color: 3447003,
+            title: "Bot's commands",
+            fields: [{
+                name: "Regular commands",
+                value: `**${settings.botPREFIX}help** - This message!\n\
+**${settings.botPREFIX}modhelp** - Commands for admins and mods\n\
+**${settings.botPREFIX}ownerhelp** - Owner's commands\n\
+**${settings.botPREFIX}bluehelp** - secret\n\
+**${settings.botPREFIX}ping** - How much ms?\n\
+**${settings.botPREFIX}info** - Give you info about the bot\n\
+**${settings.botPREFIX}8ball** - Ask the bot a (yes/no) question\n\
+**${settings.botPREFIX}weather** - Send a place in the world\n\
+**${settings.botPREFIX}invite** - Invite the bot\n\
+**${settings.botPREFIX}server** - Join NotABot's server\n\
+**${settings.botPREFIX}coinflip** - Flips a coin!\n\
+**${settings.botPREFIX}userinfo** - Mention user for info\n\
+**${settings.botPREFIX}avatar** - Get user's avatar\n\
+**${settings.botPREFIX}stats** - Bot's stats\n\
+**${settings.botPREFIX}serverinfo** - See server stats\n\
+**${settings.botPREFIX}botservers** - Bot's servers\n\
+**${settings.botPREFIX}quote** - Quotes by people\n\
+**${settings.botPREFIX}notice** - I'll hug you\n\
+**${settings.botPREFIX}issue** - Report a bug\n\
+**${settings.botPREFIX}request** - Request new features\n\
+**${settings.botPREFIX}roll** - Rolls a random number!\n\
+**${settings.botPREFIX}dick** - Sizing a dick.\n\
+**${settings.botPREFIX}dog** - Sends a picture of dog!\n\
+**${settings.botPREFIX}translate** - Translates a textץ\n\
+**${settings.botPREFIX}anime** - Sends a anime picץ\n\
+**${settings.botPREFIX}caps** - Random capsץ\n\
+**${settings.botPREFIX}advice** - Gives you an adviceץ\n\
+**${settings.botPREFIX}donate** - Help NotABot?\n\
+**${settings.botPREFIX}say** - Tell me what to say.\n\
+**${settings.botPREFIX}calc** - Math questions calculator.`
+              }
+            ],
+            timestamp: new Date(),
+            footer: {
+              icon_url: client.user.avatarURL,
+              text: "© SenpaiBot"
+            }
+          }
+        });
+
+        message.author.send('KawaiiBot | Made by illusive');
+        }
+        catch(err) {
+            message.channel.send('I could not send you my commands!');
+        } 
+        break;
+
+    case "modhelp":
+    console.log(`${message.author.tag} used the ${settings.botPREFIX}modhelp command!`);
+        logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}modhelp command!`);
+
+    message.react('✅');
+    
+    message.reply(":inbox_tray: **Please check your direct messages (Moderation commands)**");
+
+    message.author.send({embed: {
+        color: 3447003,
+        author: {
+          name: client.user.username,
+          icon_url: client.user.avatarURL
+        },
+        title: "Bot's commands",
+        fields: [{
+            name: "Moderation commands",
+            value: `**${settings.botPREFIX}ban** - Bans a user from your server! (Moderators only!)\n\
+**${settings.botPREFIX}kick** - Kicks a user out of the server! (Mederation only!)\n\
+**${settings.botPREFIX}mute** - Muted a user with a **muted** role! (Moderation only!)\n\
+**${settings.botPREFIX}unmute** - Unmutes a user and removes the **muted** role. (Moderation only!)\n\
+**${settings.botPREFIX}softban** - Kicks a user and deletes his messages. (Moderation only!)\n\
+**${settings.botPREFIX}clear** - Clear messages / user's messages! (Moderation only!)`
+          }
+        ],
+        timestamp: new Date(),
+        footer: {
+          icon_url: client.user.avatarURL,
+          text: "© KawaiiBot"
+        }
+      }
+    });
+    message.author.send('KawaiiBot | Made by illusive');
+    break;
+
+    case "ownerhelp":
+    console.log(`${message.author.tag} used the ${settings.botPREFIX}ownerhelp command!`);
+        logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}ownerhelp command!`);
+
+    if (message.author.id == 229192961907228674) {
+        message.react('✅');
+
+        message.reply(":inbox_tray: **Please check your direct messages (Owner commands)**");
+
+        message.author.send({embed: {
+            color: 3447003,
+            author: {
+              name: client.user.username,
+              icon_url: client.user.avatarURL
+            },
+            title: "Bot's commands",
+            fields: [{
+                name: "Bot's owner commands",
+                value: `**${settings.botPREFIX}botname** - Changes the bot's username. **Usage: ${settings.botPREFIX}botname [NAME]**\n\
+**${settings.botPREFIX}botavatar** - Changes the bot's avatar. **Usage: ${settings.botPREFIX}botavatar [LINK]**\n\
+**${settings.botPREFIX}botnick** - Changed the nickname in a server. **Usage: ${settings.botPREFIX}botnick [NICKNAME]**\n\
+**${settings.botPREFIX}eval** - Evaluates a code. **Usage: ${settings.botPREFIX}eval [CODE]**\n\
+**${settings.botPREFIX}shutdown** - Closes the CMD window!\n\
+**${settings.botPREFIX}botstatus** - Change the bot's status! **Usage: ${settings.botPREFIX}botstats [STATUS]**`
+              }
+            ],
+            timestamp: new Date(),
+            footer: {
+              icon_url: client.user.avatarURL,
+              text: "© SenpaiBot"
+            }
+          }
+        });
+        message.author.send('KawaiiBot | Made by illusive');
+    } else {
+        message.react('❌');
+        message.channel.send(`\`📛\` Only the owner of the bot can use this command.`);
+    }
+    break;
+
+    case "bluehelp":
+    console.log(`${message.author.tag} used the ${settings.botPREFIX}bluehelp command!`);
+        logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}bluehelp command!`);
+
+    if (message.author.id == '229192961907228674') {
+        message.react('✅');
+
+        message.reply(':wink: **Hello there my lord! Check your DM**');
+
+        message.author.send({embed: {
+            color: 3447003,
+            author: {
+              name: client.user.username,
+              icon_url: client.user.avatarURL
+            },
+            title: "Bot's commands",
+            fields: [{
+                name: "illusive's commands",
+                value: `**${settings.botPREFIX}todo** - Shows illusive's TODO list.\n\
+**${settings.botPREFIX}eval** - Evaluates a code.\n\
+**${settings.botPREFIX}shutdown** - Closes the CMD window.`
+              }
+            ],
+            timestamp: new Date(),
+            footer: {
+              icon_url: client.user.avatarURL,
+              text: "© SenpaiBot"
+            }
+          }
+        });
+        message.author.send('SenpaiBot | Made by illusive');
+    } else {
+        message.react('❌');
+        message.channel.send(`\`📛\` You're not allowed to execute this command, only my lord can use this command!\n\
+        \`Lord: illusive\``);
+    }
+    break;
+    }
+});
  
  
  
