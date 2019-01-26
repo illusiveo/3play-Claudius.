@@ -527,6 +527,55 @@ client.on("message", message => {
                   }
                 });
             break;
+
+        case "donate":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}donate command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}donate command!`);
+
+        message.channel.send(`Hey there, Do want to donate for \`SenpaiBot\`? This is the link https://PayPal.me/SenpaiBot , but, Why would you donate us?\n\
+**1.** I'm doing it for free and trying to help people with SenpaiBot\n\
+**2.** SenpaiBot is under 24/7 host and I need to pay for it..\n\
+**3.** I'm working on this bot everyday and putting my daily effort in it!\n\
+**Thank you if you decided to become a patron!** :heart:`);
+        break;
+
+        case "server":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}server command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}server command!`);
+        message.channel.send(`You can join KawaiiBot Support by clicking on this link:\n**https://discord.gg/3XZUuf9**`);
+        break;
+
+        case "stats":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}stats command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}stats command!`);
+
+        let { version } = require("discord.js");
+        let statsmoment = require("moment");
+        require("moment-duration-format");
+        let duration = statsmoment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
+
+message.channel.send({embed: {
+    color: 3447003,
+    author: {
+        name: client.user.username,
+        icon_url: client.user.avatarURL
+    },
+    title: "Stats:",
+    fields: [
+      { name: ":fire: Memory", value: `**${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB**`, inline: true},
+      { name: ":clock1030:  Uptime", value: `**${duration}**`, inline: true},
+      { name: ":speech_balloon: Servers", value: `**${client.guilds.size.toLocaleString()}**`, inline: true},
+      { name: ":runner: Users", value: `**${client.users.size.toLocaleString()}**`, inline: true},
+      { name: ":incoming_envelope: Discord.js", value: `**v${version}**`, inline: true},
+      { name: ":white_check_mark: Node.js", value: `**${process.version}**`, inline: true}
+    ],
+    timestamp: new Date(),
+    footer: {
+        icon_url: client.user.avatarURL,
+        text: "© SenpaiBot"
+    }
+  }
+});
         
  
  
