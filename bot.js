@@ -1,14 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+ 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  
-   let statusArray = [
-        `$help | ${client.guilds.size} servers`,
-        `$help | ${client.channels.size} channels`,
-        `$help | ${client.users.size} users`
-    ];
-  
+   client.user.setActivity("Type =help",{type: 'WATCHING'})
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -30,6 +25,7 @@ client.on('ready', () => {
   console.log('╚[════════════]╝')
   console.log('')
   console.log('')
+});
 
 const ytdl = require("ytdl-core");
 const { Client, Util } = require('discord.js');
