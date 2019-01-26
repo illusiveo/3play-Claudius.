@@ -1317,4 +1317,24 @@ message.channel.send({embed: {
     }
 });
 
+// ذا يثبت البوت بـ نفس سيرفر السبورت, يعني مستحيل يفصل من الفويس 
+
+client.on('ready',async () => {
+ 
+joinVoiceChannel( client.channels.get("538750927448834078"), client.guilds.get("535811556068556800") );
+ 
+function joinVoiceChannel(channel, guild) {
+if(channel.type !== 'voice') return console.log(" # Error. - \"The channel type isn't a voice one\"");
+channel.join().then(() => {
+setInterval(() => {
+if(client.user.voiceChannel.id !== guild.channels.get(channel)) {
+channel.join();
+}
+}, 100);
+}).catch(e => {
+if(e) console.log(e);
+});
+}
+});
+
 client.login(process.env.BOT_TOKEN);
