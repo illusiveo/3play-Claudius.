@@ -1,6 +1,6 @@
 {
-  "botPREFIX": "-",
-  "botTOKEN": "NTM3NjQxNzA2NDY0NjA4MjY3.DytVkg.Ot2Us7LJ772tHNQlTO8Zl4C17UA",
+  "botPREFIX": "$",
+  "botTOKEN": "NTM0MzQxNzY2NTIyOTk0Njg4.Dy3sYw.diSkLWzZfRu4WdJZubNz4cFIk0U",
   "weatherAPI": "Weather API here https://openweathermap.org",
   "ownerID": "229192961907228674",
   "logsChannelID": "535811556068556802",
