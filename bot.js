@@ -2,7 +2,13 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-   client.user.setActivity("SOON" ,{type: 'WATCHING'})
+  
+   let statusArray = [
+        `$help | ${client.guilds.size} servers`,
+        `$help | ${client.channels.size} channels`,
+        `$help | ${client.users.size} users`
+    ];
+  
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
