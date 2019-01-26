@@ -1,9 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
- 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-   client.user.setActivity("Type $help",{type: 'WATCHING'})
+   client.user.setActivity("${client.guilds.size} servers | ${settings.botPREFIX}help",{type: 'WATCHING'})
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -254,25 +253,6 @@ if (message.content.startsWith(adminprefix + 'setT')) {
 }
  
 });
-client.on("message", message => {
-    if (message.content === `${prefix}help`) {
-  const embed = new Discord.RichEmbed()
-      .setColor("#0c0c0c")
-      .setDescription(`
-**$play <title|URL|subcommand>** - plays the provided song
-**$skip** - votes to skip the current song
-**$stop** - stops the current song and clears the queue
-**$pause** - pauses the current song
-**$resume** - resume the current song
-**$volume [0-100]** - sets or shows volume
-**$leave** - leave the bot from voice channel
-**$np** - To see the song currently in use
-**$queue [pagenum]** - shows the current queue
- `)
-   message.channel.sendEmbed(embed)
-   
-   }
-   });
 
 // Help commands:
         case "help":
@@ -576,6 +556,36 @@ message.channel.send({embed: {
     }
   }
 });
+
+        case "advice":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}advice command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}advice command!`);
+
+        const advicesf = require('snekfetch');
+
+            let r = await advicesf.get('http://api.adviceslip.com/advice');
+
+            let advice = JSON.parse(r.body).slip.advice;
+
+            message.channel.send({embed: {
+                color: 3447003,
+                author: {
+                  name: client.user.username,
+                  icon_url: client.user.avatarURL
+                },
+                fields: [{
+                    name: "Advice:",
+                    value: `\`${advice}\``
+                  }
+                ],
+                timestamp: new Date(),
+                footer: {
+                  icon_url: client.user.avatarURL,
+                  text: "© SenpaiBot"
+                }
+              }
+            });
+        break;
         
  
  
