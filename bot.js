@@ -119,11 +119,11 @@ client.on("message", async message => {
               },
               {
                 name: "Contact me:",
-                value: "illusive#0001"
+                value: "Join The Support Server : https://discord.gg/TbxWa8f"
               },
               {
                 name: "Social Media",
-                value: "soon.."
+                value: "we don't have any social media.."
               },
               {
                 name: "Invite the bot here",
@@ -133,7 +133,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© KawaiiBot"
+              text: "© SenpaiBot"
             }
           }
         });
@@ -163,7 +163,7 @@ client.on("message", async message => {
         timestamp: new Date(),
         footer: {
           icon_url: client.user.avatarURL,
-          text: "© KawaiiBot"
+          text: "© SenpaiBot"
         }
       }
     });
@@ -232,7 +232,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© KawaiiBot"
+              text: "© SenpaiBot"
             }
           }
         });
@@ -250,25 +250,25 @@ client.on("message", async message => {
         const joineddiscord = (mentioneduser.createdAt.getDate() + 1) + '-' + (mentioneduser.createdAt.getMonth() + 1) + '-' + mentioneduser.createdAt.getFullYear() + ' | ' + mentioneduser.createdAt.getHours() + ':' + mentioneduser.createdAt.getMinutes() + ':' + mentioneduser.createdAt.getSeconds();
         let game;
         if (user.presence.game === null) {
-            game = 'Not currently Playing';
+            game = '**Not currently Playing**';
         } else {
             game = user.presence.game.name;
         }
         let messag;
         if (user.lastMessage === null) {
-            messag = 'He didnt sent a message';
+            messag = '**He didnt sent a message**';
         } else {
             messag = user.lastMessage;
         }
         let status;
         if (user.presence.status === 'online') {
-            status = ':green_heart:';
+            status = '**online** :green_heart:';
         } else if (user.presence.status === 'dnd') {
-            status = ':heart:';
+            status = '**dnd** :heart:';
         } else if (user.presence.status === 'idle') {
-            status = ':yellow_heart:';
+            status = '**idle** :yellow_heart:';
         } else if (user.presence.status === 'offline') {
-            status = ':black_heart:';
+            status = '**Offline** :black_heart:';
         }
       // Let afk;
       // if (user.presence.data.afk === true) {
@@ -304,7 +304,7 @@ client.on("message", async message => {
         timestamp: new Date(),
         footer: {
           icon_url: client.user.avatarURL,
-          text: "© KawaiiBot"
+          text: "© SenpaiBot"
         }
       }
     });
@@ -362,7 +362,7 @@ client.on("message", async message => {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: "© KawaiiBot"
+                  text: "© SenpaiBot"
                 }
               }
             });
@@ -404,7 +404,6 @@ client.on("message", async message => {
             color: msTOcolor,
             author: {
               name: client.user.username,
-              icon_url: client.user.avatarURL
             },
             fields: [{
                 name: "Bot's ping:",
@@ -414,7 +413,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© KawaiiBot"
+              text: "© SenpaiBot"
             }
           }
         });
@@ -452,22 +451,22 @@ client.on("message", async message => {
         }
 
         if (!time) {
-            return message.reply(`How much time ? **Usage:**\`~ban [@mention] [1d] [example]\``)
+            return message.reply(`:x: ``How much time ?`` **Usage:**\`~ban [@mention] [1d] [example]\``)
         }
 
         if (!time.match(/[1-7][s,m,h,d,w]/g)) {
-            return message.reply('I need a valid time ! look at the Usage! right here: **Usage:**`~ban [@mention] [1m] [example]`')
+            return message.reply(':x: ``I need a valid time ! look at the Usage! right here:`` **Usage:**`~ban [@mention] [1m] [example]`')
         }
 
         if (!reason) {
-            return message.reply(`You must give me a reason for the ban **Usage:**\`~ban [@mention] [1d] [example]\``)
+            return message.reply(`:x: ``You must give me a reason for the ban`` **Usage:**\`~ban [@mention] [1d] [example]\``)
         }
 
         if (!message.guild.member(usermention).bannable) {
-            return message.reply('This member is above me in the `role chain` Can\'t ban them')
+            return message.reply(':x: **This member is above me in the `role chain` Can\'t ban them**')
         }
 
-        message.reply("This user has been banned from the server.");
+        message.reply(":white_check_mark: **This user has been banned from the server**");
 
         usermention.send(`You've just got banned from ${guild.name}  \n State reason: **${reason}** \n **Disclamer**: If the ban is not timed and Permanent you may not appeal the **BAN**!`)
         message.guild.ban(usermention, 7);
@@ -488,7 +487,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© KawaiiBot"
+              text: "© SenpaiBot"
             }
           }
         });
@@ -511,16 +510,16 @@ client.on("message", async message => {
         let memberkick = message.guild.member;
       // If(!message.member.roles.has(adminRole.id)) return message.reply(":lock: You dont have permissions for that");
         if (!modlogkick) {
-            return message.reply(':x: **I need a text channel named** `mod-log` **to print my ban/kick logs in, please create one**');
+            return message.reply(':x: **I need a text channel named** `mod-log` **to print my ban/kick logs in, please create one**').then(message => message.delete(5000));
         }
         if (message.mentions.users.size < 1) {
-            return message.reply('You need to mention someone to Kick him!. **Usage:**~kick [@mention] [example]`');
+            return message.reply('You need to mention someone to Kick him!. **Usage:**~kick [@mention] [example]`').then(message => message.delete(5000));
         }
         if (!reasonkick) {
-            return message.reply('You must give me a reason for kick **Usage:**`~kick [@mention] [example]`');
+            return message.reply('You must give me a reason for kick **Usage:**`~kick [@mention] [example]`').then(message => message.delete(5000));
         }
         if (!message.guild.member(usermentionkick).kickable) {
-            return message.reply('This member is above me in the `role chain` Can\'t kick him');
+            return message.reply('This member is above me in the `role chain` Can\'t kick him');.then(message => message.delete(5000));
         }
         message.guild.member(usermentionkick).kick();
 
@@ -538,7 +537,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© KawaiiBot"
+              text: "© SenpaiBot"
             }
           }
         });
@@ -570,7 +569,7 @@ client.on("message", async message => {
         }
 
         if (!muteRoleMute) {
-            return message.reply('`Please create a role called "NotAMute"`');
+            return message.reply(':x: `Please create a role called` **"Mute"**`');
         }
 
         if (message.mentions.users.size < 1) {
@@ -580,24 +579,24 @@ client.on("message", async message => {
             return message.reply(':wink: **You cant punish yourself** ');
         }
         if (!timeMute) {
-            return message.reply('specify the time for the mute!**Usage:**`~mute [@mention] [1m] [example]`');
+            return message.reply(':x: ``specify the time for the mute!`` **Usage:**`~mute [@mention] [1m] [example]`').then(message => message.delete(3000));
         }
         if (!timeMute.match(/[1-60][s,m,h,d,w]/g)) {
-            return message.reply('I need a valid time ! look at the Usage! right here: **Usage:**`~mute [@mention] [1m] [example]`');
+            return message.reply(':x: ``I need a valid time ! look at the Usage! right here:`` **Usage:**`~mute [@mention] [1m] [example]`').then(message => message.delete(3000));
         }
         if (!reasonMute) {
-            return message.reply('You must give me a reason for Mute **Usage:**`~mute [@mention] [15m] [example]`');
+            return message.reply(':x: ``You must give me a reason for Mute`` **Usage:**`~mute [@mention] [15m] [example]`').then(message => message.delete(3000));
         }
         if (reasonMute.time < 1) {
             return message.reply('TIME?').then(message => message.delete(2000));
         }
         if (reasonMute.length < 1) {
-            return message.reply('You must give me a reason for Mute');
+            return message.reply('You must give me a reason for Mute').then(message => message.delete(2000));
         }
-        message.guild.member(userMute).addRole(muteRoleMute)
+        message.guild.member(userMute).addRole(Mute)
 
         setTimeout(() => {
-            message.guild.member(userMute).removeRole(muteRoleMute)
+            message.guild.member(userMute).removeRole(Mute)
         }, msmute(timeMute));
         message.guild.channels.filter(textchannel => textchannel.type === 'text').forEach(cnl => {
             cnl.overwritePermissions(muteRoleMute, {
@@ -621,7 +620,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© KawaiiBot"
+              text: "© SenpaiBot"
             }
           }
         });
@@ -642,7 +641,7 @@ client.on("message", async message => {
             return message.reply(':lock: **I need** `MANAGE_ROLES` **Permissions to execute unmute**')
         }
         let userUnmute = message.mentions.users.first();
-        let muteRoleUnmute = client.guilds.get(message.guild.id).roles.find('name', 'NotAMute');
+        let muteRoleUnmute = client.guilds.get(message.guild.id).roles.find('name', 'Mute');
         if (message.mentions.users.size < 1) {
             return message.reply(':face_palm: **You need to mention someone to unmute him!**');
         }
@@ -675,7 +674,7 @@ client.on("message", async message => {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: "© KawaiiBot"
+                  text: "© SenpaiBot"
                 }
             }
         })
@@ -744,7 +743,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© KawaiiBot"
+              text: "© SenpaiBot"
             }
           }
         });
@@ -754,7 +753,7 @@ client.on("message", async message => {
         console.log(`${message.author.tag} used the ${settings.botPREFIX}todo command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}todo command!`);
 
-        if (message.author.id == '153478211207036929') {
+        if (message.author.id == '229192961907228674') {
             return message.channel.send(`**Unban command.**\n
 **Bot's owner commands.**\n
 **Some fun commands.**\n
@@ -833,7 +832,7 @@ request(botavatar, function (err, res, body) {
 
             const evalargs = message.content.split(" ").slice(1);
 
-              if (message.author.id == settings.ownerID || message.author.id == '153478211207036929') {
+              if (message.author.id == settings.ownerID || message.author.id == '229192961907228674') {
               try {
                 const code = evalargs.join(" ");
                 let evaled = eval(code);
@@ -956,7 +955,7 @@ request(botavatar, function (err, res, body) {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: "© KawaiiBot"
+                  text: "© SenpaiBot"
                 }
               }
             });
@@ -1028,21 +1027,10 @@ request(botavatar, function (err, res, body) {
             });
         break;
 
-        case "donate":
-        console.log(`${message.author.tag} used the ${settings.botPREFIX}donate command!`);
-            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}donate command!`);
-
-        message.channel.send(`Hey there, Do want to donate for \`KawaiiBot\`? This is the link https://www.patreon.com/KawaiiBotDiscord , but, Why would you donate us?\n\
-**1.** I'm doing it for free and trying to help people with KawaiiBot\n\
-**2.** KawaiiBot is under 24/7 host and I need to pay for it..\n\
-**3.** I'm working on this bot everyday and putting my daily effort in it!\n\
-**Thank you if you decided to become a patron!** :heart:`);
-        break;
-
-        case "server":
+        case "support":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}server command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}server command!`);
-        message.channel.send(`You can join KawaiiBot Support by clicking on this link:\n**https://discord.gg/3XZUuf9**`);
+        message.channel.send(`You can join SenpaiBot Support by clicking on this link:\n**https://discord.gg/3XZUuf9**`);
         break;
 
         case "stats":
@@ -1139,7 +1127,7 @@ message.channel.send({embed: {
                 message.channel.send({embed: {
                     color: 3447003,
                     author: {
-                      name: 'KawaiiBot\'s calculator',
+                      name: 'SenpaiBot\'s calculator',
                       icon_url: client.user.avatarURL
                     },
                     fields: [
@@ -1205,12 +1193,11 @@ message.channel.send({embed: {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© KawaiiBot"
+              text: "© SenpaiBot"
             }
           }
         });
 
-        message.author.send('KawaiiBot | Made by illusive');
         }
         catch(err) {
             message.channel.send('I could not send you my commands!');
@@ -1245,11 +1232,11 @@ message.channel.send({embed: {
         timestamp: new Date(),
         footer: {
           icon_url: client.user.avatarURL,
-          text: "© KawaiiBot"
+          text: "© SenpaiBot"
         }
       }
-    });
-    message.author.send('KawaiiBot | Made by illusive');
+    })
+
     break;
 
     case "ownerhelp":
@@ -1281,22 +1268,21 @@ message.channel.send({embed: {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© KawaiiBot"
+              text: "© SenpaiBot"
             }
           }
         });
-        message.author.send('KawaiiBot | Made by illusive');
     } else {
         message.react('❌');
         message.channel.send(`\`📛\` Only the owner of the bot can use this command.`);
     }
     break;
 
-    case "bluehelp":
+    case "illusivehelp":
     console.log(`${message.author.tag} used the ${settings.botPREFIX}bluehelp command!`);
         logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}bluehelp command!`);
 
-    if (message.author.id == '153478211207036929') {
+    if (message.author.id == '229192961907228674') {
         message.react('✅');
 
         message.reply(':wink: **Hello there my lord! Check your DM**');
@@ -1322,16 +1308,13 @@ message.channel.send({embed: {
             }
           }
         });
-        message.author.send('KawaiiBot | Made by illusive');
     } else {
         message.react('❌');
         message.channel.send(`\`📛\` You're not allowed to execute this command, only my lord can use this command!\n\
-        \`Lord: illusive\``);
+     -->   \`Lord: illusive\``);
     }
     break;
     }
 });
-
-// Bot's token ;D
  
 client.login(process.env.BOT_TOKEN);
