@@ -59,7 +59,7 @@ client.on("guildCreate", guild => {
     if (guildMSG) {
         guildMSG.send(`
 For more info type \`${settings.botPREFIX}help\`!\n\
-discord BOT Official Server: https://discord.gg/pSHBetN`);
+My Lord <@229192961907228674> Make me Fro the Bitch <@394498659540271104> ! `);
     } else {
         return;
     }
