@@ -39,6 +39,7 @@ LET'S GO!
     let statusArray = [
         `${settings.botPREFIX}help | ${client.guilds.size} servers!`,
         `${settings.botPREFIX}help | ${client.channels.size} channels!`,
+        `${settings.botPREFIX}help | By : illusive!`,
         `${settings.botPREFIX}help | ${client.users.size} users!`
     ];
 
@@ -119,7 +120,7 @@ client.on("message", async message => {
               },
               {
                 name: "Contact me:",
-                value: "Join The Support Server : https://discord.gg/TbxWa8f"
+                value: "-"
               },
               {
                 name: "Social Media",
@@ -133,7 +134,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© SenpaiBot"
+              text: "© Majin BOT"
             }
           }
         });
@@ -146,7 +147,7 @@ client.on("message", async message => {
         let question = message.content.split(' ').slice(1).join(' ');
 
         if (!question) {
-            return message.reply('What question should I answer on?\n\**Usage:** `~8ball is Blue Malgeran is sexy af?`');
+            return message.reply('What question should I answer on?\n\**Usage:** `~8ball is illusive is sexy af?`');
         }
 
       message.channel.send({embed: {
@@ -163,7 +164,7 @@ client.on("message", async message => {
         timestamp: new Date(),
         footer: {
           icon_url: client.user.avatarURL,
-          text: "© SenpaiBot"
+          text: "© Majin BOT"
         }
       }
     });
@@ -177,7 +178,7 @@ client.on("message", async message => {
         const fetch = require('node-fetch');
         let arg = message.content.split(' ').join(' ').slice(9);
         if (!arg) {
-            return message.reply('I need a city to check :wink:');
+            return message.reply(':wink: **I need a city to check**');
         }
         fetch('http://api.openweathermap.org/data/2.5/weather?q=' + arg + '&APPID=' + apiKey + '&units=metric')
             .then(res => {
@@ -232,7 +233,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© SenpaiBot"
+              text: "© Majin BOT"
             }
           }
         });
@@ -304,7 +305,7 @@ client.on("message", async message => {
         timestamp: new Date(),
         footer: {
           icon_url: client.user.avatarURL,
-          text: "© SenpaiBot"
+          text: "© Majin BOT"
         }
       }
     });
@@ -320,7 +321,7 @@ client.on("message", async message => {
             "\nAvatar URL: " + user.avatarURL; /*The Avatar URL*/
             message.channel.sendMessage(output); //We send the output in the current channel.
       } else {
-            message.reply("Please mention someone :thinking:"); //Reply with a mention saying "Invalid user."
+            message.reply(":thinking: **Please mention someone**"); //Reply with a mention saying "Invalid user."
       }
         break;
 
@@ -362,7 +363,7 @@ client.on("message", async message => {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: "© SenpaiBot"
+                  text: "© Majin BOT"
                 }
               }
             });
@@ -406,14 +407,14 @@ client.on("message", async message => {
               name: client.user.username,
             },
             fields: [{
-                name: "Bot's ping:",
+                name: "BOT ping is:",
                 value: `\`${client.ping}ms\``
               }
             ],
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© SenpaiBot"
+              text: "© Majin BOT"
             }
           }
         });
@@ -487,7 +488,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© SenpaiBot"
+              text: "© Majin BOT"
             }
           }
         });
@@ -537,7 +538,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© SenpaiBot"
+              text: "© Majin BOT"
             }
           }
         });
@@ -620,7 +621,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© SenpaiBot"
+              text: "© Majin BOT"
             }
           }
         });
@@ -674,7 +675,7 @@ client.on("message", async message => {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: "© SenpaiBot"
+                  text: "© Majin BOT"
                 }
             }
         })
@@ -743,7 +744,7 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© SenpaiBot"
+              text: "© Majin BOT"
             }
           }
         });
@@ -944,7 +945,7 @@ request(botavatar, function (err, res, body) {
             message.channel.send({embed: {
                 color: 3447003,
                 author: {
-                  name: 'NotABot\'s translator',
+                  name: 'Majin\'s BOT translator',
                   icon_url: client.user.avatarURL
                 },
                 fields: [{
@@ -955,7 +956,7 @@ request(botavatar, function (err, res, body) {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: "© SenpaiBot"
+                  text: "© Majin BOT"
                 }
               }
             });
@@ -1021,7 +1022,7 @@ request(botavatar, function (err, res, body) {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: "© SenpaiBot"
+                  text: "© Majin BOT"
                 }
               }
             });
@@ -1060,7 +1061,7 @@ message.channel.send({embed: {
     timestamp: new Date(),
     footer: {
         icon_url: client.user.avatarURL,
-        text: "© SenpaiBot"
+        text: "© Majin BOT"
     }
   }
 });
@@ -1137,7 +1138,7 @@ message.channel.send({embed: {
                     timestamp: new Date(),
                     footer: {
                       icon_url: client.user.avatarURL,
-                      text: "© SenpaiBot"
+                      text: "© Majin BOT"
                     }
                   }
                 });
@@ -1161,13 +1162,12 @@ message.channel.send({embed: {
                 value: `**${settings.botPREFIX}help** - This message!\n\
 **${settings.botPREFIX}modhelp** - Commands for admins and mods\n\
 **${settings.botPREFIX}ownerhelp** - Owner's commands\n\
-**${settings.botPREFIX}bluehelp** - secret\n\
+**${settings.botPREFIX}illusivehelp** - secret :wink:\n\
 **${settings.botPREFIX}ping** - How much ms?\n\
 **${settings.botPREFIX}info** - Give you info about the bot\n\
 **${settings.botPREFIX}8ball** - Ask the bot a (yes/no) question\n\
 **${settings.botPREFIX}weather** - Send a place in the world\n\
 **${settings.botPREFIX}invite** - Invite the bot\n\
-**${settings.botPREFIX}server** - Join NotABot's server\n\
 **${settings.botPREFIX}coinflip** - Flips a coin!\n\
 **${settings.botPREFIX}userinfo** - Mention user for info\n\
 **${settings.botPREFIX}avatar** - Get user's avatar\n\
@@ -1185,7 +1185,6 @@ message.channel.send({embed: {
 **${settings.botPREFIX}anime** - Sends a anime picץ\n\
 **${settings.botPREFIX}caps** - Random capsץ\n\
 **${settings.botPREFIX}advice** - Gives you an adviceץ\n\
-**${settings.botPREFIX}donate** - Help NotABot?\n\
 **${settings.botPREFIX}say** - Tell me what to say.\n\
 **${settings.botPREFIX}calc** - Math questions calculator.`
               }
@@ -1193,14 +1192,14 @@ message.channel.send({embed: {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© SenpaiBot"
+              text: "© Majin BOT"
             }
           }
         });
 
         }
         catch(err) {
-            message.channel.send('I could not send you my commands!');
+            message.channel.send(':x: **I could not send you my commands!**');
         } 
         break;
 
@@ -1232,7 +1231,7 @@ message.channel.send({embed: {
         timestamp: new Date(),
         footer: {
           icon_url: client.user.avatarURL,
-          text: "© SenpaiBot"
+          text: "© Majin BOT"
         }
       }
     })
@@ -1268,7 +1267,7 @@ message.channel.send({embed: {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© SenpaiBot"
+              text: "© Majin BOT"
             }
           }
         });
@@ -1304,14 +1303,14 @@ message.channel.send({embed: {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© SenpaiBot"
+              text: "© Majin BOT"
             }
           }
         });
     } else {
         message.react('❌');
         message.channel.send(`\`📛\` You're not allowed to execute this command, only my lord can use this command!\n\
-     -->   \`Lord: illusive\``);
+     -->   \`Lord: <@229192961907228674>\``);
     }
     break;
     }
