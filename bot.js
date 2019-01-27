@@ -63,7 +63,7 @@ My Lord <@229192961907228674> Make me Fro the Bitch <@394498659540271104> ! `);
     } else {
         return;
     }
-;
+});
 
 // Logs of the bot leaves a server and changed the game of the bot
 client.on("guildDelete", guild => {
