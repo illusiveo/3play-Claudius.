@@ -1311,7 +1311,7 @@ message.channel.send({embed: {
     } else {
         message.react('❌');
         message.channel.send(`\`📛\` You're not allowed to execute this command, only my lord can use this command!\n\
-     -->   \`Lord: <@229192961907228674>\``);
+     -->   \`Lord:` ** <@229192961907228674> **`);
     }
     break;
     }
