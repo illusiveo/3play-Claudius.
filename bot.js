@@ -58,8 +58,9 @@ client.on("guildCreate", guild => {
 
     if (guildMSG) {
         guildMSG.send(`
-For more info type \`${settings.botPREFIX}help\`!\n\
-My Lord <@229192961907228674> for the bitch <@394498659540271104> <3`);
+**HELLO EVREYONE ! **
+**For more info type** \`${settings.botPREFIX}help\`!\n\
+**My Lord** <@229192961907228674> **make me for the bitch** <@394498659540271104> ❤️ `);
     } else {
         return;
     }
