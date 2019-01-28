@@ -54,12 +54,12 @@ client.on("guildCreate", guild => {
     console.log(`The bot just joined to ${guild.name}, Owned by ${guild.owner.user.tag}`);
     logsServerJoin.send(`The bot just joined to ${guild.name}, Owned by ${guild.owner.user.tag}`);
 
-    var guildMSG = guild.channels.find('name', 'general');
+    var guildMSG = guild.channels.find('name', 'chat');
 
     if (guildMSG) {
         guildMSG.send(`
 For more info type \`${settings.botPREFIX}help\`!\n\
-My Lord <@229192961907228674> Make me Fro the Bitch <@394498659540271104> ! `);
+My Lord <@229192961907228674> for the bitch <@394498659540271104> <3`);
     } else {
         return;
     }
