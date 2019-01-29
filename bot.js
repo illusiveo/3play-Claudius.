@@ -1188,7 +1188,7 @@ message.channel.send({embed: {
 **${settings.botPREFIX}advice** - Gives you an adviceץ\n\
 **${settings.botPREFIX}say** - Tell me what to say.\n\
 **${settings.botPREFIX}calc** - Math questions calculator.\n\
-**${settings.botPREFIX}helpmusic** - music commands.`
+**${settings.botPREFIX}helpmusic** - music commands. ``( SOON )```
               }
             ],
             timestamp: new Date(),
