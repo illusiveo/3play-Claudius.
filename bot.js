@@ -188,6 +188,125 @@ class RamMoe {
 module.exports = RamMoe;
 module.exports = Cry;
 
+/**
+ * Create an message embed object
+ * @param {string} link image url
+ * @param {string} requester footer text
+ * @param {string} text embed description
+ * @param {string} title embed title
+ * @param {import('discord.js').MessageEmbedField} embedFields fields of this embed
+ * @param {import('discord.js').MessageEmbedAuthor} embedAuthor author of this embed
+ * @param {string} requesterAvatar icon on footer
+ */
+exports.create = (link, requester, text, title, embedFields, embedAuthor, requesterAvatar) => {
+    return {
+        author: embedAuthor,
+        color: Colors.getHex(Colors.list[Math.floor(Math.random() * Colors.list.length)]),
+        title: title,
+        description : text,
+        image: {
+            url: link
+        },
+        fields: embedFields,
+        footer: {
+            text: requester
+        }
+    }
+}
+
+exports.createAuthor = (author, link, icon) => {
+    return {
+        name: author,
+        url: link,
+        iconURL: icon
+    }
+}
+
+exports.createField = (fieldName, body, isInline) => {
+    return {
+        name: fieldName,
+        value: body,
+        inline: isInline ? isInline : false
+    }
+}
+
+/**
+ *
+ * @param {import('discord.js').Message} msg
+ */
+exports.createRequester = (msg) => {
+    return exports.createFooter(msg.author.tag);
+}
+
+exports.createFooter = (name, link, proxyLink) => {
+    return {
+        text: name,
+        iconURL: link,
+        proxyIconUrl: proxyLink
+    }
+}
+
+const colors = {
+    DEFAULT: 0x000000,
+    AQUA: 0x1ABC9C,
+    GREEN: 0x2ECC71,
+    BLUE: 0x3498DB,
+    PURPLE: 0x9B59B6,
+    LUMINOUS_VIVID_PINK: 0xE91E63,
+    GOLD: 0xF1C40F,
+    ORANGE: 0xE67E22,
+    RED: 0xE74C3C,
+    GREY: 0x95A5A6,
+    NAVY: 0x34495E,
+    DARK_AQUA: 0x11806A,
+    DARK_GREEN: 0x1F8B4C,
+    DARK_BLUE: 0x206694,
+    DARK_PURPLE: 0x71368A,
+    DARK_VIVID_PINK: 0xAD1457,
+    DARK_GOLD: 0xC27C0E,
+    DARK_ORANGE: 0xA84300,
+    DARK_RED: 0x992D22,
+    DARK_GREY: 0x979C9F,
+    DARKER_GREY: 0x7F8C8D,
+    LIGHT_GREY: 0xBCC0C0,
+    DARK_NAVY: 0x2C3E50,
+    BLURPLE: 0x7289DA,
+    GREYPLE: 0x99AAB5,
+    DARK_BUT_NOT_BLACK: 0x2C2F33,
+    NOT_QUITE_BLACK: 0x23272A,
+  };
+
+exports.list = [
+    'AQUA',
+    'GREEN',
+    'BLUE',
+    'PURPLE',
+    'GOLD',
+    'ORANGE',
+    'RED',
+    'GREY',
+    'DARKER_GREY',
+    'NAVY',
+    'DARK_AQUA',
+    'DARK_GREEN',
+    'DARK_BLUE',
+    'DARK_PURPLE',
+    'DARK_GOLD',
+    'DARK_ORANGE',
+    'DARK_RED',
+    'DARK_GREY',
+    'LIGHT_GREY',
+    'DARK_NAVY'
+];
+
+exports.getHex = function(color) {
+    if (colors[color]) {
+        return colors[color]
+    } else {
+        return colors.DEFAULT
+    }
+}
+
 // set token from heroku, or from setting.json
 
 client.login(process.env.BOT_TOKEN);
