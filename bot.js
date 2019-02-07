@@ -156,8 +156,6 @@ class Cry extends Command {
     }
 }
 
-const request = require('sync-request');
-
 const baseUrl = 'https://rra.ram.moe';
 const imagePath = '/i/r';
 const imageTypeParam = '?type=';
