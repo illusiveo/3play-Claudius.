@@ -133,8 +133,6 @@ class Command {
 
 module.exports = Command;
 
-const Embed = require('../../util/embed');
-
 const info = {
     name: "cry",
     aliases: [],
