@@ -133,6 +133,8 @@ class Command {
 
 module.exports = Command;
 
+        case "cry":
+
 const info = {
     name: "cry",
     aliases: [],
@@ -302,6 +304,23 @@ exports.getHex = function(color) {
         return colors.DEFAULT
     }
 }
+
+        case "anime":
+
+        const animesf = require('snekfetch');
+
+            let res = await animesf.get('http://api.cutegirls.moe/json');
+            if (res.body.status !== 200) {
+                return message.channel.send('An error occurred while processing this command.');
+            }
+            let animepicembed = new Discord.RichEmbed()
+            .setColor('#f266f9')
+            .setTitle('Anime Picture')
+            .setImage(res.body.data.image);
+    
+            message.channel.send(animepicembed);
+        break;
+
 
 // set token from heroku, or from setting.json
 
