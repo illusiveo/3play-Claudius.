@@ -133,8 +133,6 @@ class Command {
 
 module.exports = Command;
 
-        case "cry":
-
 const info = {
     name: "cry",
     aliases: [],
