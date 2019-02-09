@@ -48,6 +48,7 @@ LET'S GO!
     }, 100000);
 });
 
+const { Command } = require('klasa');
 
 module.exports = class AwooCommand extends Command {
 	constructor(...args) {
