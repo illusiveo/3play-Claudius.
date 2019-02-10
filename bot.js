@@ -68,10 +68,6 @@ client.on("guildCreate", guild => {
 
     var guildMSG = guild.channels.find('name', 'general');
 
-    if (guildMSG) {
-        guildMSG.send(`
-well, hello evreyone!,
-For more info type \`${settings.botPREFIX}help\`!\n\`);
     } else {
         return;
     }
