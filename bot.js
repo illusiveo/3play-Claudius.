@@ -61,17 +61,6 @@ client.on('message', msg => {
   }
 });
 
-// Logs of the bot joined a server and changed the game of the bot
-client.on("guildCreate", guild => {
-    const logsServerJoin = client.channels.get(settings.logsChannelID);
-    logsServerJoin.send(`The bot just joined to ${guild.name}, Owned by ${guild.owner.user.tag}`);
-
-    var guildMSG = guild.channels.find('name', 'general');
-
-    } else {
-        return;
-    }
-});
 
 // Logs of the bot leaves a server and changed the game of the bot
 client.on("guildDelete", guild => {
