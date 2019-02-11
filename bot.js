@@ -51,8 +51,6 @@ LET'S GO!
     }, 100000);
 });
 
-});
-
 // idk why i create this.
 
 client.on('message', msg => {
