@@ -59,11 +59,28 @@ client.on('message', msg => {
   }
 });
 
+// Logs of the bot joined a server and changed the game of the bot
+client.on("guildCreate", guild => {
+    const logsServerJoin = client.channels.get(settings.logsChannelID);
+    console.log(`The bot just joined to ${guild.name}, Owned by ${guild.owner.user.tag}`);
+    logsServerJoin.send(`The bot just joined to ${guild.name}, Owned by ${guild.owner.user.tag}`);
+
+    var guildMSG = guild.channels.find('name', 'general');
+
+    if (guildMSG) {
+        guildMSG.send(`
+For more info type \`${settings.botPREFIX}help\`!\n\
+discord BOT Official Server: https://discord.gg/pSHBetN`);
+    } else {
+        return;
+    }
+});
 
 // Logs of the bot leaves a server and changed the game of the bot
 client.on("guildDelete", guild => {
     const logsServerLeave = client.channels.get(settings.logsChannelID);
-logsServerLeave.send(`The bot has been left ${guild.name}, Owned by ${guild.owner.user.tag}`);
+    console.log(`The bot has been left ${guild.name}, Owned by ${guild.owner.user.tag}`);
+    logsServerLeave.send(`The bot has been left ${guild.name}, Owned by ${guild.owner.user.tag}`);
 });
 
 // Message function
@@ -76,6 +93,16 @@ client.on("message", async message => {
 
     const logsCommands = client.channels.get(settings.logsChannelID);
 
+    //Disables commands in a private chat
+    if  (message.channel.type == "dm") {
+        console.log(`${message.author.tag} tried to use a command in DM!`);
+        return logsCommands.send(`${message.author.tag} tried to use a command in DM!`);
+    }
+    //Users blacklist
+    if (message.author.id == "") {
+        console.log(`[BlackList] ${message.author.tag} tried to use a command!`);
+        return logsCommands.send(`[BlackList] ${message.author.tag} tried to use a command!`);
+    }
 
     //Channels blacklist
     if (message.channel.id == "") return;
@@ -84,12 +111,54 @@ client.on("message", async message => {
     if (message.guild.id == "") return;
 
     var args = message.content.substring(settings.botPREFIX.length).split(" ");
+    // Bot's commands from here.
+    switch (args[0]) {
+        case "info":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}info command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}info command!`);
 
+        message.channel.send({embed: {
+            color: 3447003,
+            title: "Info:",
+            description: "This is the info about the bot",
+            fields: [{
+                name: "Created by:",
+                value: "This bot created by: illusive"
+              },
+              {
+                name: "Made with:",
+                value: "This bot made with [Discord.JS](http://discord.js.org)"
+              },
+              {
+                name: "Contact me:",
+                value: "illusive#0001"
+              },
+              {
+                name: "Social Media",
+                value: "soon.."
+              },
+              {
+                name: "Invite the bot here",
+                value: "[:robot:](https://discordapp.com/oauth2/authorize?client_id=" + client.user.id + "&scope=bot&permissions=0)"
+              }
+            ],
+            timestamp: new Date(),
+            footer: {
+              icon_url: client.user.avatarURL,
+              text: "© KawaiiBot"
+            }
+          }
+        });
+        break;
+
+        case "8ball":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}8ball command!`);
+        logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}8ball command!`);
 
         let question = message.content.split(' ').slice(1).join(' ');
 
         if (!question) {
-            return message.reply('**Usage:**What question should I answer on?\n\`');
+            return message.reply('What question should I answer on?\n\**Usage:** `~8ball is Blue Malgeran is sexy af?`');
         }
 
       message.channel.send({embed: {
@@ -106,12 +175,15 @@ client.on("message", async message => {
         timestamp: new Date(),
         footer: {
           icon_url: client.user.avatarURL,
-          text: ""
+          text: "© KawaiiBot"
         }
       }
     });
         break;
 
+        case "weather":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}weather command!`);
+        logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}weather command!`);
 
         let apiKey = settings.weatherAPI;
         const fetch = require('node-fetch');
@@ -143,17 +215,22 @@ client.on("message", async message => {
                     message.channel.send('Something went wrong while checking the query!');
                 }
             });
+        break;
 
+        case "invite":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}invite command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}invite command!`);
 
         message.reply("[ :robot: ] ** Okay, you can invite me here:** https://discordapp.com/oauth2/authorize?client_id=" + client.user.id + "&scope=bot&permissions=0");
         break;
 
+        case "coinflip":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}coinflip command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}coinflip command!`);
 
         let answers = [
-            ':open_hands: **heads**',
-            ':open_hands: **tails**'
+            'heads',
+            'tails'
         ];
 
         message.channel.send({embed: {
@@ -167,16 +244,19 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: ""
+              text: "© KawaiiBot"
             }
           }
         });
         break;
 
+        case "userinfo":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}userinfo command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}userinfo command!`);
 
         let user = message.mentions.users.first();
         if (!user) {
-            return message.reply(':face_palm: **You must mention someone**');
+            return message.reply(':face_palm: You must mention someone');
         }
         const mentioneduser = message.mentions.users.first();
         const joineddiscord = (mentioneduser.createdAt.getDate() + 1) + '-' + (mentioneduser.createdAt.getMonth() + 1) + '-' + mentioneduser.createdAt.getFullYear() + ' | ' + mentioneduser.createdAt.getHours() + ':' + mentioneduser.createdAt.getMinutes() + ':' + mentioneduser.createdAt.getSeconds();
@@ -225,7 +305,7 @@ client.on("message", async message => {
           icon_url: user.displayAvatarURL
         },
         fields: [{
-            name: '**Info:**',
+            name: '**UserInfo:**',
             value: `**Username:** ${user.tag}\n**Joined Discord:** ${joineddiscord}\n**Last message:** ${messag}\n**Playing:** ${game}\n**Status:** ${status}\n**Bot?** ${user.bot}`
           },
           {
@@ -236,12 +316,15 @@ client.on("message", async message => {
         timestamp: new Date(),
         footer: {
           icon_url: client.user.avatarURL,
-          text: ""
+          text: "© KawaiiBot"
         }
       }
     });
         break;
 
+        case "avatar":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}avatar command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}avatar command!`);
         
         if(message.mentions.users.first()) { //Check if the message has a mention in it.
             let user = message.mentions.users.first(); //Since message.mentions.users returns a collection; we must use the first() method to get the first in the collection.
@@ -249,10 +332,13 @@ client.on("message", async message => {
             "\nAvatar URL: " + user.avatarURL; /*The Avatar URL*/
             message.channel.sendMessage(output); //We send the output in the current channel.
       } else {
-            message.reply(":thinking: **Please mention someone**"); //Reply with a mention saying "Invalid user."
+            message.reply("Please mention someone :thinking:"); //Reply with a mention saying "Invalid user."
       }
         break;
 
+        case "serverinfo":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}serverinfo command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}serverinfo command!`);
 
         let guildmessageServerInfo = message.guild;
         let nameServerInfo = message.guild.name;
@@ -288,12 +374,13 @@ client.on("message", async message => {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: ""
+                  text: "© KawaiiBot"
                 }
               }
             });
         break;
 
+        case "botservers":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}botservers command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}botservers command!`);
 
@@ -319,6 +406,7 @@ client.on("message", async message => {
            message.channel.send(`Im inside these servers! http://hastebin.com/` + r.body.key));
         break;
 
+        case "ping":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}ping command!`);
         logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}ping command!`);
 
@@ -338,12 +426,13 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: ""
+              text: "© KawaiiBot"
             }
           }
         });
         break;
 
+        case "ban":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}ban command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}ban command!`);
 
@@ -411,12 +500,13 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: ""
+              text: "© KawaiiBot"
             }
           }
         });
         break;
 
+        case "kick":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}kick command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}kick command!`);
 
@@ -460,12 +550,13 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: ""
+              text: "© KawaiiBot"
             }
           }
         });
         break;
 
+        case "mute":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}mute command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}mute command!`);
 
@@ -542,12 +633,13 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: ""
+              text: "© KawaiiBot"
             }
           }
         });
         break;
 
+        case "unmute":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}unmute command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}unmute command!`);
 
@@ -571,6 +663,7 @@ client.on("message", async message => {
         });
         break;
 
+        case "quote":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}quote command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}quote command!`);
 
@@ -594,13 +687,14 @@ client.on("message", async message => {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: ""
+                  text: "© KawaiiBot"
                 }
             }
         })
         });
         break;
 
+        case "notice":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}notice command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}notice command!`);
 
@@ -615,6 +709,7 @@ client.on("message", async message => {
         message.reply(`${hugs[~~(Math.random() * hugs.length)]}`);
         break;
 
+        case "softban":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}softban command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}softban command!`);
 
@@ -661,16 +756,17 @@ client.on("message", async message => {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: ""
+              text: "© KawaiiBot"
             }
           }
         });
         break;
 
+        case "todo":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}todo command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}todo command!`);
 
-        if (message.author.id == '229192961907228674') {
+        if (message.author.id == '153478211207036929') {
             return message.channel.send(`**Unban command.**\n
 **Bot's owner commands.**\n
 **Some fun commands.**\n
@@ -685,6 +781,7 @@ client.on("message", async message => {
         }
         break;
 
+        case "botname":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}botname command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}botname command!`);
 
@@ -699,6 +796,7 @@ client.on("message", async message => {
         }
         break;
 
+        case "botavatar":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}botavatar command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}botavatar command!`);
 
@@ -720,6 +818,7 @@ request(botavatar, function (err, res, body) {
         }
         break;
 
+        case "botnick":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}botnick command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}botnick command!`);
 
@@ -734,6 +833,7 @@ request(botavatar, function (err, res, body) {
         }
         break;
 
+        case "eval":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}eval command!`);
 
         const clean = text => {
@@ -745,7 +845,7 @@ request(botavatar, function (err, res, body) {
 
             const evalargs = message.content.split(" ").slice(1);
 
-              if (message.author.id == settings.ownerID || message.author.id == '229192961907228674') {
+              if (message.author.id == settings.ownerID || message.author.id == '153478211207036929') {
               try {
                 const code = evalargs.join(" ");
                 let evaled = eval(code);
@@ -763,6 +863,7 @@ request(botavatar, function (err, res, body) {
             };
         break;
 
+        case "shutdown":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}shutdown command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}shutdown command!`);
 
@@ -778,6 +879,7 @@ request(botavatar, function (err, res, body) {
         }
         break;
 
+        case "roll":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}roll command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}roll command!`);
 
@@ -790,6 +892,7 @@ request(botavatar, function (err, res, body) {
         message.reply(`:game_die: Just rolled a number: **${Math.floor(Math.random() * rollnumber) + 1}**`);
         break;
 
+        case "dick":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}dick command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}dick command!`);
         // pretty shitty command
@@ -807,6 +910,7 @@ request(botavatar, function (err, res, body) {
         message.channel.send(`**${dickuser} Size: ** ${dicksize[~~Math.floor(Math.random() * dicksize.length)]}\nSized by **${message.author.tag}**`);
         break;
 
+        case "dog":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}dog command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}dog command!`);
 
@@ -823,6 +927,7 @@ request(botavatar, function (err, res, body) {
         message.channel.send(dogpicembed);
         break;
         
+        case "say":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}say command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}say command!`);
 
@@ -834,6 +939,7 @@ request(botavatar, function (err, res, body) {
             message.channel.send(botsay);
         break;
 
+        case "translate":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}translate command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}translate command!`);
 
@@ -862,7 +968,7 @@ request(botavatar, function (err, res, body) {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: ""
+                  text: "© KawaiiBot"
                 }
               }
             });
@@ -876,6 +982,7 @@ request(botavatar, function (err, res, body) {
     });
         break;
 
+        case "anime":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}anime command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}anime command!`);
         
@@ -893,6 +1000,7 @@ request(botavatar, function (err, res, body) {
             message.channel.send(animepicembed);
         break;
 
+        case "caps":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}caps command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}caps command!`);
 
@@ -902,6 +1010,7 @@ request(botavatar, function (err, res, body) {
         message.channel.send(sponge(message.content.split(' ').slice(1).join(' ')));
         break;
 
+        case "advice":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}advice command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}advice command!`);
 
@@ -925,17 +1034,30 @@ request(botavatar, function (err, res, body) {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: ""
+                  text: "© KawaiiBot"
                 }
               }
             });
         break;
 
+        case "donate":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}donate command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}donate command!`);
+
+        message.channel.send(`Hey there, Do want to donate for \`KawaiiBot\`? This is the link https://www.patreon.com/KawaiiBotDiscord , but, Why would you donate us?\n\
+**1.** I'm doing it for free and trying to help people with KawaiiBot\n\
+**2.** KawaiiBot is under 24/7 host and I need to pay for it..\n\
+**3.** I'm working on this bot everyday and putting my daily effort in it!\n\
+**Thank you if you decided to become a patron!** :heart:`);
+        break;
+
+        case "server":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}server command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}server command!`);
         message.channel.send(`You can join KawaiiBot Support by clicking on this link:\n**https://discord.gg/3XZUuf9**`);
         break;
 
+        case "stats":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}stats command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}stats command!`);
 
@@ -962,11 +1084,15 @@ message.channel.send({embed: {
     timestamp: new Date(),
     footer: {
         icon_url: client.user.avatarURL,
-        text: ""
+        text: "© KawaiiBot"
     }
   }
 });
         break;
+
+        case "clear":
+            console.log(`${message.author.tag} used the ${settings.botPREFIX}clear command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}clear command!`);
 
             if (!message.guild.member(message.author).hasPermission('MANAGE_MESSAGES')) return message.reply(':lock: **You** need `MANAGE_MESSAGES` permissions to execute `clear`');
             if (!message.guild.member(client.user).hasPermission('MANAGE_MESSAGES')) return message.reply(':lock: **I** need `MANAGE_MESSAGES` Permissions to execute `clear`');
@@ -985,6 +1111,9 @@ message.channel.send({embed: {
             });
             break;
 
+            case "botstatus":
+            console.log(`${message.author.tag} used the ${settings.botPREFIX}botstatus command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}botstatus command!`);
 
             let setStatusArgs = message.content.split(' ').slice(1).join(' ');
             
@@ -996,6 +1125,7 @@ message.channel.send({embed: {
             .then(message.channel.send(' :ok_hand: **Done**'));
             break;
 
+            case "calc":
             console.log(`${message.author.tag} used the ${settings.botPREFIX}calc command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}calc command!`);
                 let math = require('math-expression-evaluator');
@@ -1021,7 +1151,7 @@ message.channel.send({embed: {
                 message.channel.send({embed: {
                     color: 3447003,
                     author: {
-                      name: 'calculator',
+                      name: 'KawaiiBot\'s calculator',
                       icon_url: client.user.avatarURL
                     },
                     fields: [
@@ -1031,13 +1161,16 @@ message.channel.send({embed: {
                     timestamp: new Date(),
                     footer: {
                       icon_url: client.user.avatarURL,
-                      text: ""
+                      text: "© KawaiiBot"
                     }
                   }
                 });
             break;
         
         // Help commands:
+        case "help":
+        console.log(`${message.author.tag} used the ${settings.botPREFIX}help command!`);
+            logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}help command!`);
 
         try {
             message.reply(":inbox_tray: **Please check your direct messages**");
@@ -1051,6 +1184,8 @@ message.channel.send({embed: {
                 name: "Regular commands",
                 value: `**${settings.botPREFIX}help** - This message!\n\
 **${settings.botPREFIX}modhelp** - Commands for admins and mods\n\
+**${settings.botPREFIX}ownerhelp** - Owner's commands\n\
+**${settings.botPREFIX}bluehelp** - secret\n\
 **${settings.botPREFIX}ping** - How much ms?\n\
 **${settings.botPREFIX}info** - Give you info about the bot\n\
 **${settings.botPREFIX}8ball** - Ask the bot a (yes/no) question\n\
@@ -1074,6 +1209,7 @@ message.channel.send({embed: {
 **${settings.botPREFIX}anime** - Sends a anime picץ\n\
 **${settings.botPREFIX}caps** - Random capsץ\n\
 **${settings.botPREFIX}advice** - Gives you an adviceץ\n\
+**${settings.botPREFIX}donate** - Help NotABot?\n\
 **${settings.botPREFIX}say** - Tell me what to say.\n\
 **${settings.botPREFIX}calc** - Math questions calculator.`
               }
@@ -1081,17 +1217,19 @@ message.channel.send({embed: {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: ""
+              text: "© KawaiiBot"
             }
           }
         });
 
+        message.author.send('KawaiiBot | Made by illusive');
         }
         catch(err) {
             message.channel.send('I could not send you my commands!');
         } 
         break;
 
+    case "modhelp":
     console.log(`${message.author.tag} used the ${settings.botPREFIX}modhelp command!`);
         logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}modhelp command!`);
 
@@ -1119,13 +1257,14 @@ message.channel.send({embed: {
         timestamp: new Date(),
         footer: {
           icon_url: client.user.avatarURL,
-          text: ""
+          text: "© KawaiiBot"
         }
       }
     });
+    message.author.send('KawaiiBot | Made by illusive');
     break;
 
-
+    case "ownerhelp":
     console.log(`${message.author.tag} used the ${settings.botPREFIX}ownerhelp command!`);
         logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}ownerhelp command!`);
 
@@ -1140,9 +1279,9 @@ message.channel.send({embed: {
               name: client.user.username,
               icon_url: client.user.avatarURL
             },
-            title: "BOT's commands",
+            title: "Bot's commands",
             fields: [{
-                name: "BOT's owner commands",
+                name: "Bot's owner commands",
                 value: `**${settings.botPREFIX}botname** - Changes the bot's username. **Usage: ${settings.botPREFIX}botname [NAME]**\n\
 **${settings.botPREFIX}botavatar** - Changes the bot's avatar. **Usage: ${settings.botPREFIX}botavatar [LINK]**\n\
 **${settings.botPREFIX}botnick** - Changed the nickname in a server. **Usage: ${settings.botPREFIX}botnick [NICKNAME]**\n\
@@ -1154,17 +1293,22 @@ message.channel.send({embed: {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: ""
+              text: "© KawaiiBot"
             }
           }
         });
+        message.author.send('KawaiiBot | Made by illusive');
     } else {
         message.react('❌');
         message.channel.send(`\`📛\` Only the owner of the bot can use this command.`);
     }
     break;
 
-    if (message.author.id == '229192961907228674') {
+    case "bluehelp":
+    console.log(`${message.author.tag} used the ${settings.botPREFIX}bluehelp command!`);
+        logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}bluehelp command!`);
+
+    if (message.author.id == '153478211207036929') {
         message.react('✅');
 
         message.reply(':wink: **Hello there my lord! Check your DM**');
@@ -1186,10 +1330,11 @@ message.channel.send({embed: {
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
-              text: ""
+              text: "© KawaiiBot"
             }
           }
         });
+        message.author.send('KawaiiBot | Made by illusive');
     } else {
         message.react('❌');
         message.channel.send(`\`📛\` You're not allowed to execute this command, only my lord can use this command!\n\
@@ -1197,8 +1342,7 @@ message.channel.send({embed: {
     }
     break;
     }
-);
+});
 
 // Bot's token (Synced from settings.json)
-
 client.login(settings.botTOKEN)
