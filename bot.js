@@ -85,7 +85,6 @@ client.on("message", async message => {
 
     var args = message.content.substring(settings.botPREFIX.length).split(" ");
 
-        case "8ball":
 
         let question = message.content.split(' ').slice(1).join(' ');
 
@@ -113,7 +112,6 @@ client.on("message", async message => {
     });
         break;
 
-        case "weather":
 
         let apiKey = settings.weatherAPI;
         const fetch = require('node-fetch');
@@ -147,12 +145,10 @@ client.on("message", async message => {
             });
         break;
 
-        case "invite":
 
         message.reply("[ :robot: ] ** Okay, you can invite me here:** https://discordapp.com/oauth2/authorize?client_id=" + client.user.id + "&scope=bot&permissions=0");
         break;
 
-        case "coinflip":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}coinflip command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}coinflip command!`);
 
@@ -178,7 +174,6 @@ client.on("message", async message => {
         });
         break;
 
-        case "user":
 
         let user = message.mentions.users.first();
         if (!user) {
@@ -248,7 +243,6 @@ client.on("message", async message => {
     });
         break;
 
-        case "avatar":
         
         if(message.mentions.users.first()) { //Check if the message has a mention in it.
             let user = message.mentions.users.first(); //Since message.mentions.users returns a collection; we must use the first() method to get the first in the collection.
@@ -260,7 +254,6 @@ client.on("message", async message => {
       }
         break;
 
-        case "serverinfo":
 
         let guildmessageServerInfo = message.guild;
         let nameServerInfo = message.guild.name;
@@ -302,7 +295,6 @@ client.on("message", async message => {
             });
         break;
 
-        case "botservers":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}botservers command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}botservers command!`);
 
@@ -328,7 +320,6 @@ client.on("message", async message => {
            message.channel.send(`Im inside these servers! http://hastebin.com/` + r.body.key));
         break;
 
-        case "ping":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}ping command!`);
         logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}ping command!`);
 
@@ -354,7 +345,6 @@ client.on("message", async message => {
         });
         break;
 
-        case "ban":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}ban command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}ban command!`);
 
@@ -428,7 +418,6 @@ client.on("message", async message => {
         });
         break;
 
-        case "kick":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}kick command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}kick command!`);
 
@@ -478,7 +467,6 @@ client.on("message", async message => {
         });
         break;
 
-        case "mute":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}mute command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}mute command!`);
 
@@ -561,7 +549,6 @@ client.on("message", async message => {
         });
         break;
 
-        case "unmute":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}unmute command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}unmute command!`);
 
@@ -585,7 +572,6 @@ client.on("message", async message => {
         });
         break;
 
-        case "quote":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}quote command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}quote command!`);
 
@@ -616,7 +602,6 @@ client.on("message", async message => {
         });
         break;
 
-        case "notice":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}notice command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}notice command!`);
 
@@ -631,7 +616,6 @@ client.on("message", async message => {
         message.reply(`${hugs[~~(Math.random() * hugs.length)]}`);
         break;
 
-        case "softban":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}softban command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}softban command!`);
 
@@ -684,7 +668,6 @@ client.on("message", async message => {
         });
         break;
 
-        case "todo":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}todo command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}todo command!`);
 
@@ -703,7 +686,6 @@ client.on("message", async message => {
         }
         break;
 
-        case "botname":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}botname command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}botname command!`);
 
@@ -718,7 +700,6 @@ client.on("message", async message => {
         }
         break;
 
-        case "botavatar":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}botavatar command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}botavatar command!`);
 
@@ -740,7 +721,6 @@ request(botavatar, function (err, res, body) {
         }
         break;
 
-        case "botnick":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}botnick command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}botnick command!`);
 
@@ -755,7 +735,6 @@ request(botavatar, function (err, res, body) {
         }
         break;
 
-        case "eval":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}eval command!`);
 
         const clean = text => {
@@ -785,7 +764,6 @@ request(botavatar, function (err, res, body) {
             };
         break;
 
-        case "shutdown":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}shutdown command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}shutdown command!`);
 
@@ -801,7 +779,6 @@ request(botavatar, function (err, res, body) {
         }
         break;
 
-        case "roll":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}roll command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}roll command!`);
 
@@ -814,7 +791,6 @@ request(botavatar, function (err, res, body) {
         message.reply(`:game_die: Just rolled a number: **${Math.floor(Math.random() * rollnumber) + 1}**`);
         break;
 
-        case "dick":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}dick command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}dick command!`);
         // pretty shitty command
@@ -832,7 +808,6 @@ request(botavatar, function (err, res, body) {
         message.channel.send(`**${dickuser} Size: ** ${dicksize[~~Math.floor(Math.random() * dicksize.length)]}\nSized by **${message.author.tag}**`);
         break;
 
-        case "dog":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}dog command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}dog command!`);
 
@@ -849,7 +824,6 @@ request(botavatar, function (err, res, body) {
         message.channel.send(dogpicembed);
         break;
         
-        case "say":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}say command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}say command!`);
 
@@ -861,7 +835,6 @@ request(botavatar, function (err, res, body) {
             message.channel.send(botsay);
         break;
 
-        case "translate":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}translate command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}translate command!`);
 
@@ -904,7 +877,6 @@ request(botavatar, function (err, res, body) {
     });
         break;
 
-        case "anime":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}anime command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}anime command!`);
         
@@ -922,7 +894,6 @@ request(botavatar, function (err, res, body) {
             message.channel.send(animepicembed);
         break;
 
-        case "caps":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}caps command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}caps command!`);
 
@@ -932,7 +903,6 @@ request(botavatar, function (err, res, body) {
         message.channel.send(sponge(message.content.split(' ').slice(1).join(' ')));
         break;
 
-        case "advice":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}advice command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}advice command!`);
 
@@ -962,13 +932,11 @@ request(botavatar, function (err, res, body) {
             });
         break;
 
-        case "server":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}server command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}server command!`);
         message.channel.send(`You can join KawaiiBot Support by clicking on this link:\n**https://discord.gg/3XZUuf9**`);
         break;
 
-        case "stats":
         console.log(`${message.author.tag} used the ${settings.botPREFIX}stats command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}stats command!`);
 
@@ -1001,8 +969,6 @@ message.channel.send({embed: {
 });
         break;
 
-        case "clear":
-
             if (!message.guild.member(message.author).hasPermission('MANAGE_MESSAGES')) return message.reply(':lock: **You** need `MANAGE_MESSAGES` permissions to execute `clear`');
             if (!message.guild.member(client.user).hasPermission('MANAGE_MESSAGES')) return message.reply(':lock: **I** need `MANAGE_MESSAGES` Permissions to execute `clear`');
             const firstUserClear = message.mentions.users.first();
@@ -1020,7 +986,6 @@ message.channel.send({embed: {
             });
             break;
 
-            case "botstatus":
 
             let setStatusArgs = message.content.split(' ').slice(1).join(' ');
             
@@ -1032,7 +997,6 @@ message.channel.send({embed: {
             .then(message.channel.send(' :ok_hand: **Done**'));
             break;
 
-            case "calc":
             console.log(`${message.author.tag} used the ${settings.botPREFIX}calc command!`);
             logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}calc command!`);
                 let math = require('math-expression-evaluator');
@@ -1075,7 +1039,6 @@ message.channel.send({embed: {
             break;
         
         // Help commands:
-        case "help":
 
         try {
             message.reply(":inbox_tray: **Please check your direct messages**");
@@ -1130,7 +1093,6 @@ message.channel.send({embed: {
         } 
         break;
 
-    case "modhelp":
     console.log(`${message.author.tag} used the ${settings.botPREFIX}modhelp command!`);
         logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}modhelp command!`);
 
@@ -1164,7 +1126,7 @@ message.channel.send({embed: {
     });
     break;
 
-    case "ownerhelp":
+
     console.log(`${message.author.tag} used the ${settings.botPREFIX}ownerhelp command!`);
         logsCommands.send(`${message.author.tag} used the ${settings.botPREFIX}ownerhelp command!`);
 
@@ -1203,8 +1165,6 @@ message.channel.send({embed: {
     }
     break;
 
-    case "illusivehelp":
-
     if (message.author.id == '229192961907228674') {
         message.react('✅');
 
@@ -1238,7 +1198,7 @@ message.channel.send({embed: {
     }
     break;
     }
-});
+);
 
 // Bot's token (Synced from settings.json)
 
