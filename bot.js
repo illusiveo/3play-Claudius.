@@ -141,9 +141,10 @@ client.on("message", async message => {
             }).catch(err => {
                 if (err) {
                     message.channel.send('Something went wrong while checking the query!');
+                            break;
+
                 }
             });
-        break;
 
 
         message.reply("[ :robot: ] ** Okay, you can invite me here:** https://discordapp.com/oauth2/authorize?client_id=" + client.user.id + "&scope=bot&permissions=0");
