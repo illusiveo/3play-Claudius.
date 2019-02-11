@@ -141,8 +141,6 @@ client.on("message", async message => {
             }).catch(err => {
                 if (err) {
                     message.channel.send('Something went wrong while checking the query!');
-                            break;
-
                 }
             });
 
