@@ -42,6 +42,8 @@ LET'S GO!
     let statusArray = [
         `${settings.botPREFIX}help | ${client.guilds.size} servers`,
         `${settings.botPREFIX}help | with you`,
+        `${settings.botPREFIX}help | Konnichi Wa!`,
+        `${settings.botPREFIX}help | uwu`,
         `${settings.botPREFIX}help | by: someone`,
         `${settings.botPREFIX}help | ${client.users.size} users!`
     ];
@@ -51,37 +53,6 @@ LET'S GO!
     }, 100000);
 });
 
-// idk why i create this.
-
-client.on('message', msg => {
-  if (msg.content === '<@536145332497809428>') {
-    msg.reply(':angry: **why did you pinged me!**');
-  }
-});
-
-// Logs of the bot joined a server and changed the game of the bot
-client.on("guildCreate", guild => {
-    const logsServerJoin = client.channels.get(settings.logsChannelID);
-    console.log(`The bot just joined to ${guild.name}, Owned by ${guild.owner.user.tag}`);
-    logsServerJoin.send(`The bot just joined to ${guild.name}, Owned by ${guild.owner.user.tag}`);
-
-    var guildMSG = guild.channels.find('name', 'general');
-
-    if (guildMSG) {
-        guildMSG.send(`
-For more info type \`${settings.botPREFIX}help\`!\n\
-discord BOT Official Server: https://discord.gg/pSHBetN`);
-    } else {
-        return;
-    }
-});
-
-// Logs of the bot leaves a server and changed the game of the bot
-client.on("guildDelete", guild => {
-    const logsServerLeave = client.channels.get(settings.logsChannelID);
-    console.log(`The bot has been left ${guild.name}, Owned by ${guild.owner.user.tag}`);
-    logsServerLeave.send(`The bot has been left ${guild.name}, Owned by ${guild.owner.user.tag}`);
-});
 
 // Message function
 client.on("message", async message => {
